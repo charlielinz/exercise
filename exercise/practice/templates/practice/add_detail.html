@@ -1,4 +1,4 @@
-{}<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,7 +11,14 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1 style="font-size: 60px;">Hi</h1>
+    <h1 style="font-size: 40px;">Add New People</h1>
+      <form method="post">    
+        {% csrf_token %}    
+        <ul>{{ form.as_p }}
+        <button type="submit">SUBMIT</button></ul>  
+      </form>
+      
+    
       
 
     <!-- Optional JavaScript -->

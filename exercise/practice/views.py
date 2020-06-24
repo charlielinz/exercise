@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Person
+from .forms import AddNewPerson
 
 
 def index(request):
@@ -19,7 +20,22 @@ def persons_detail(request, id):
 
 
 def add_detail(request):
-    context = {
+    if request.method == 'POST':
+        form = AddNewPerson(request.post)
 
-    }
-    return render(request, 'practice/add_detail.html', context)
+        if form.is_valid():
+            form.save()
+            text = form.cleaned_data
+            form = AddNewPerson
+            return redirect('practice:add_detail')
+        context = {
+            'form': form,
+            'text': text
+        }
+        return render(request, 'practice/add_detail.html', context)
+    else:
+        form = AddNewPerson()
+        context = {
+            'form': form
+        }
+        return render(request, 'practice/add_detail.html', context)
