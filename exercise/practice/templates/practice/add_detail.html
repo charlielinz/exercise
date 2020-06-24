@@ -11,12 +11,19 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1 style="font-size: 40px;">Add New People</h1>
-      <form method="post">    
-        {% csrf_token %}    
-        <ul>{{ form.as_p }}
-        <button type="submit">SUBMIT</button></ul>  
-      </form>
+    <h1 style="font-size: 60px;">Add New People</h1>
+      <h2>
+        <form method="post">    
+          {% csrf_token %}    
+          <ul>
+            {{ form.as_p }}
+            <button type="submit">SUBMIT</button>
+          </ul>
+            <a href="/practice">Back</a>
+          
+        </form>
+      </h2>
+      
       
     
       

@@ -21,7 +21,7 @@ def persons_detail(request, id):
 
 def add_detail(request):
     if request.method == 'POST':
-        form = AddNewPerson(request.post)
+        form = AddNewPerson(request.POST)
 
         if form.is_valid():
             form.save()
