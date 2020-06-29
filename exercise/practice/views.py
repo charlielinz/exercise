@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 from .models import Person
 from .forms import AddNewPerson
 
@@ -25,17 +26,34 @@ def add_detail(request):
 
         if form.is_valid():
             form.save()
-            text = form.cleaned_data
-            form = AddNewPerson
-            return redirect('practice:add_detail')
+            return redirect('/practice')
         context = {
             'form': form,
-            'text': text
         }
         return render(request, 'practice/add_detail.html', context)
+
     else:
         form = AddNewPerson()
         context = {
             'form': form
         }
         return render(request, 'practice/add_detail.html', context)
+
+
+def edit_detail(request):
+    context = {
+
+    }
+    return render(request, 'practice/edit_detail.html', context)
+
+
+def delete_detail(request, id):
+    try:
+        person = Person.objects.get(id=id)
+    except Person.DoesNotExist:
+        raise Http404('Page do not exist')
+    person.delete()
+    context = {
+        'person': person
+    }
+    return render(request, 'practice/delete_detail.html', context)
