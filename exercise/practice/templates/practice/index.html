@@ -1,45 +1,38 @@
-<!doctype html>
-<html>
-
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-  <title>Hello, world!</title>
-</head>
-
-<body>
-  <h1 style="font-size: 60px;">People</h1>
+{% extends 'practice/base.html' %}
+{% block title %}<title>PPLz</title>{% endblock %}
+{% block content %}
+<div class='container'>
+  <h1 class='text-center' style="font-size: 60px;">PPLz</h1>
+  <p class='lead text-center font-italic'>
+    easily manage all your people
+  </p>
   <h2>
-    <a href="{% url 'practice:add_detail' %}">add</a>
-    <a href="{% url 'practice:edit_detail' %}">edit</a>
+    <a class='btn btn-outline-primary' href="{% url 'practice:add_detail' %}" style='width: 80px;'>Add</a>
   </h2>
   <h2>
-    <ul>
-      {% for object in objects %}
-      <li>
-        <a href="{% url 'practice:persons_detail' id=object.id %}">{{ object.name }}</a>
-        <a href="{% url 'practice:delete_detail' id=object.id %}" style="font-size: 20px;">delete</a>
-      </li>
-      {% endfor %}
-    </ul>
+    <table class='table'>
+      <thead class='font-weight-bolder' style='font-size: 20px;'>
+        <tr>
+          <th scope='col'>Name</th>
+          <th scope='col'>Age</th>
+          <th scope='col'>Phone Number</th>
+          <th scope='col'>Email</th>
+          <th scope='col'></th>
+        </tr>
+      </thead>
+      <tbody class='font-weight-normal' style='font-size: 20px;'>
+        {% for object in objects %}
+        <tr>
+          <td><a class="text-decoration-none" href="{% url 'practice:edit_detail' id=object.id %}">{{ object.name }}</a>
+          </td>
+          <td>{{ object.age }}</td>
+          <td>{{ object.phone_number }}</td>
+          <td>{{ object.email }}</td>
+          <td><a class="text-decoration-none" href="{% url 'practice:delete_detail' id=object.id %}">delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </h2>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+</div>
+{% endblock %}
